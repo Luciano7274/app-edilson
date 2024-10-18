@@ -6,28 +6,23 @@ export function Form() {
     const [weight, setWeight] = useState('');
     const [imc, setImc] = useState('');
     
-
-function imcCalulator()
+function Validatorimc()
 {
+    if (height !== undefined && weight !== undefined) {
     let totalImc = (weight/(height*height)).toFixed(2)
     setImc(totalImc)
-
+    setHeight('')
+    setWeight('')
 }
-    function validatorImc ()
-{
-   if(!weight  && height !='') //*negação
-    {
-     imcCalulator()
-     setHeight('')
-     setWeight('')
-
-   } 
 }
+
     return (
         <View style={styles.formContext}>
             <View style={styles.form}>
                 <Text style={styles.formLabel}>Altura:</Text>
                 <TextInput
+                    onChangeText={setHeight}
+                    inputMode="numeric"
                     placeholder="Ex. 1.75"
                     value={height} 
                     style={styles.formInput}
@@ -35,13 +30,15 @@ function imcCalulator()
                 
                 <Text style={styles.formLabel}>Peso:</Text>
                 <TextInput
+                    onChangeText={setWeight}
+                    inputMode="numeric"
                     placeholder="Ex. 67.5"
                     value={weight} 
                     style={styles.formInput}
                 />
 
                 <Pressable
-                    onPress={() => validatorImc()}
+                    onPress={() => Validatorimc()}
                     style={styles.formButtom}
                 >
                     <Text style={styles.formButtomText}>Calcular</Text>
