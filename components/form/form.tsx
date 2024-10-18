@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 export function Form() {
     const [height, setHeight] = useState('');
     const [weight, setWeight] = useState('');
     const [imc, setImc] = useState('');
+    const [imcList, setimcList] = useState([]);
     
 function Validatorimc()
 {
+    console.log(imcList);
     if (height !== undefined && weight !== undefined) {
     let totalImc = (weight/(height*height)).toFixed(2)
-    setImc(totalImc)
+
+    imcList.push(totalImc) //adicionando um novo índice
+    setImc(totalImc) //imc recebe novo resultado
+
     setHeight('')
     setWeight('')
 }
@@ -43,7 +49,19 @@ function Validatorimc()
                 >
                     <Text style={styles.formButtomText}>Calcular</Text>
                 </Pressable>
+
                 <Text style={styles.formResultadoIMC}>{imc}</Text>
+
+                <FlatList
+                    data={imcList.reverse()}
+                    renderItem={({item}) => {
+                        return (
+                            <View>
+                                <Text>{item}</Text>
+                            </View>
+                        )
+                    }}
+                />
             </View>
         </View>
     );
