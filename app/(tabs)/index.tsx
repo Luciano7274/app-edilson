@@ -6,11 +6,12 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { View } from 'react-native';
 import { Form } from '@/components/form/form';
+import { Triangulo } from '@/components/triangulo';
 
 export default function HomeScreen() {
   return (
     <View>
-      <Form/>
+      <Triangulo/>
     </View>
   );
 }
